@@ -11,20 +11,16 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:finance_tracker/main.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  testWidgets('App should render with bottom navigation',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(FinanceTrackerApp());
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    // Verify bottom navigation items exist
+    expect(find.text('Dashboard'), findsOneWidget);
+    expect(find.text('Add Transaction'), findsOneWidget);
+    expect(find.text('Insights'), findsOneWidget);
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
-
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    // Verify initial screen is Dashboard
+    expect(find.byIcon(Icons.dashboard), findsOneWidget);
   });
 }
