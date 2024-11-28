@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:finance_tracker/core/theme/app_theme.dart';
 
 class AddTransactionScreen extends StatefulWidget {
   @override
@@ -65,6 +66,10 @@ class _AddTransactionScreenState extends State<AddTransactionScreen> {
               ),
               SizedBox(height: 20),
               ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppColors.primaryGold,
+                  foregroundColor: AppColors.richBlack,
+                ),
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
                     _formKey.currentState!.save();

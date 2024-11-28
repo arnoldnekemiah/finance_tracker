@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
+import 'package:finance_tracker/core/theme/app_theme.dart';
 
 class InsightsScreen extends StatelessWidget {
   final Map<String, double> spendingSummary = {
@@ -51,13 +52,13 @@ class InsightsScreen extends StatelessWidget {
   Color _getColorForCategory(String category) {
     switch (category) {
       case "Food":
-        return Colors.blue;
+        return AppColors.primaryGold;
       case "Transport":
-        return Colors.green;
+        return AppColors.midnightBlue;
       case "Shopping":
-        return Colors.orange;
+        return AppColors.darkGold;
       default:
-        return Colors.grey;
+        return AppColors.lightBlue;
     }
   }
 }
