@@ -1,12 +1,11 @@
-enum TransactionType { income, expense }
-
 class Transaction {
-  final int id;
+  final String id;
   final double amount;
   final String category;
-  final TransactionType type;
+  final String type;
   final DateTime date;
-  final String? notes;
+  final String notes;
+  final String? recurringId;
 
   const Transaction({
     required this.id,
@@ -14,19 +13,23 @@ class Transaction {
     required this.category,
     required this.type,
     required this.date,
-    this.notes,
+    required this.notes,
+    this.recurringId,
   });
+
+  bool get isExpense => type == 'Expense';
+  bool get isIncome => type == 'Income';
+  bool get isRecurring => recurringId != null;
 
   factory Transaction.fromJson(Map<String, dynamic> json) {
     return Transaction(
-      id: json['id'],
+      id: json['id'].toString(),
       amount: json['amount'].toDouble(),
       category: json['category'],
-      type: json['type'] == 'Income'
-          ? TransactionType.income
-          : TransactionType.expense,
+      type: json['type'],
       date: DateTime.parse(json['date']),
       notes: json['notes'],
+      recurringId: json['recurringId'],
     );
   }
 
@@ -35,9 +38,10 @@ class Transaction {
       'id': id,
       'amount': amount,
       'category': category,
-      'type': type == TransactionType.income ? 'Income' : 'Expense',
+      'type': type,
       'date': date.toIso8601String(),
       'notes': notes,
+      'recurringId': recurringId,
     };
   }
 }
