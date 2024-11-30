@@ -2,7 +2,7 @@ import 'package:finance_tracker/dummy/spending_summary.dart';
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:finance_tracker/core/theme/app_theme.dart';
-import 'package:finance_tracker/data/models/transaction.dart';
+// import 'package:finance_tracker/data/models/transaction.dart';
 
 class InsightsScreen extends StatefulWidget {
   @override
@@ -64,7 +64,7 @@ class _InsightsScreenState extends State<InsightsScreen>
     return Column(
       children: [
         Expanded(
-          flex: 2,
+          flex: 1,
           child: PieChart(
             PieChartData(
               sections: _generatePieChartSections(),
