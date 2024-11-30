@@ -1,6 +1,8 @@
+import 'package:finance_tracker/data/models/budget.dart';
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:finance_tracker/core/theme/app_theme.dart';
+import 'package:finance_tracker/presentation/widgets/budget_summary_card.dart';
 
 class DashboardScreen extends StatelessWidget {
   @override
@@ -31,6 +33,8 @@ class DashboardScreen extends StatelessWidget {
               child: Column(
                 children: [
                   _buildBalanceCard(context),
+                  const SizedBox(height: 20),
+                  _buildBudgetOverview(),
                   const SizedBox(height: 20),
                   _buildWeeklySpendingChart(),
                   const SizedBox(height: 20),
@@ -274,5 +278,60 @@ class DashboardScreen extends StatelessWidget {
     } else {
       return '${date.day}/${date.month}/${date.year}';
     }
+  }
+
+  Widget _buildBudgetOverview() {
+    // Dummy data for now
+    final List<Budget> budgets = [
+      Budget(
+        category: 'Food',
+        limit: 500,
+        spent: 350,
+        startDate: DateTime.now().subtract(const Duration(days: 30)),
+        endDate: DateTime.now(),
+      ),
+      Budget(
+        category: 'Transport',
+        limit: 200,
+        spent: 150,
+        startDate: DateTime.now().subtract(const Duration(days: 30)),
+        endDate: DateTime.now(),
+      ),
+      Budget(
+        category: 'Shopping',
+        limit: 300,
+        spent: 320,
+        startDate: DateTime.now().subtract(const Duration(days: 30)),
+        endDate: DateTime.now(),
+      ),
+    ];
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Text(
+            'Budget Overview',
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+        ListView.builder(
+          shrinkWrap: true,
+          physics: NeverScrollableScrollPhysics(),
+          itemCount: budgets.length,
+          itemBuilder: (context, index) {
+            return Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+              child: BudgetSummaryCard(budget: budgets[index]),
+            );
+          },
+        ),
+      ],
+    );
   }
 }
